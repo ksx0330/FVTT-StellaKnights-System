@@ -1,0 +1,84 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+    <div class="title-header">Sheath</div>
+   
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="140" width="140"/>
+        <div class="header-fields">
+            <h1 class="charname">
+              <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+            </h1>
+
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">{{localize "Stella.Biography"}}</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Biography Tab --}}
+        <div class="tab biography" data-group="primary" data-tab="description">
+            <h2>{{localize "Stella.Basic"}}</h2>
+            <table>
+                <tr>
+                    <th>{{localize "Stella.Age"}}</th>
+                    <td><input type="text" name="data.details.age" value="{{data.details.age}}"></td>
+                    <th>{{localize "Stella.Sex"}}</th>
+                    <td><input type="text" name="data.details.sex" value="{{data.details.sex}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Career"}}</th>
+                    <td colspan="3"><input type="text" name="data.details.career" value="{{data.details.career}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Story"}}</th>
+                    <td colspan="3"><input type="text" name="data.details.story" value="{{data.details.story}}"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <select name="data.karma.type">
+                            {{#select data.karma.type}}
+                            <option value="hope">{{localize "Stella.Hope"}}</option>
+                            <option value="despair">{{localize "Stella.Despair"}}</option>
+                            {{/select}}
+                        </select>
+                    </th>
+                    <td colspan="3"><input type="text" name="data.karma.detail" value="{{data.karma.detail}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Wish"}}</th>
+                    <td colspan="3"><input type="text" name="data.details.wish" value="{{data.details.wish}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Personality"}}</th>
+                    <td><input type="text" name="data.details.personality.first" value="{{data.details.personality.first}}"></td>
+                    <th>{{localize "Stella.PersonalityAnd"}}</th>
+                    <td><input type="text" name="data.details.personality.second" value="{{data.details.personality.second}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Crest"}}</th>
+                    <td><input type="text" name="data.details.crest.color" value="{{data.details.crerst.color}}"></td>
+                    <th>{{localize "Stella.CrestAnd"}}</th>
+                    <td><input type="text" name="data.details.crest.flower" value="{{data.details.crest.flower}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Keyword"}}</th>
+                    <td colspan="3"><input type="text" name="data.details.keyword" value="{{data.details.keyword}}"></td>
+                </tr>
+
+            </table>
+
+            <h2>{{localize "Stella.Biography"}}</h2>
+            {{editor content=data.datails.biography target="data.details.biography" button=true owner=owner editable=editable}}
+        </div>
+
+
+    </section>
+
+</form>
+

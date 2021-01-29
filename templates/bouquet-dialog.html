@@ -1,0 +1,23 @@
+<div class="dialog-content">
+    <h2>{{localize "Stella.BouquetDialog"}}</h2>
+
+    <div id="dice-list">
+    {{#each actors }}
+        <div class="bouquet-viewer" data-id="{{id}}">
+            <img src="{{image}}" width="50" height="50">
+            <b>{{name}} ({{bouquet}})</b>
+
+            <button type="button" class="icon-button add-bouquet" data-add="1"><i class="fas fa-smile"></i></button>
+        </div>
+    {{/each}}
+    </div>
+
+</div>
+<div class="dialog-buttons">
+    {{#each buttons as |button id|}}
+    <button class="dialog-button" data-button="{{id}}">
+        {{{button.icon}}}
+        {{{button.label}}}
+    </button>
+    {{/each}}
+</div>

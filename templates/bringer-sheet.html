@@ -1,0 +1,177 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+    <div class="title-header">Bringer
+        <span class="bouquet">
+            <i class="fas fa-smile"></i>
+            <input type="text" name="data.bouquet" value="{{data.bouquet}}" data-dtype="Number">
+        </span>
+    </div>
+   
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="140" width="140"/>
+        <div class="header-fields">
+            <h1 class="charname">
+              <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/>
+            </h1>
+            <div class="resource five-width">
+                <div class="text-box">{{localize "Stella.Hp"}}</div>
+                <input type="text" class="slice-input" name="data.hp.value" value="{{data.hp.value}}" data-dtype="Number"/>
+                <span> / </span>
+                <input type="text" class="slice-input" name="data.hp.max" value="{{data.hp.max}}" data-dtype="Number"/>
+            </div>
+            <div class="resource five-width">
+                <div class="text-box">{{localize "Stella.Defense"}}</div>
+                <input type="text" class="" name="data.defense.value" value="{{data.defense.value}}" data-dtype="Number"/>
+            </div>
+            <div class="resource five-width">
+                <div class="text-box">{{localize "Stella.Charge"}}</div>
+                <input type="text" class="" name="data.charge.value" value="{{data.charge.value}}" data-dtype="Number"/>
+            </div>
+            <div class="resource five-width">
+                <div class="text-box">{{localize "Stella.Exp"}}</div>
+                <input type="text" class="" name="data.exp" value="{{data.exp}}" data-dtype="Number"/>
+            </div>
+            <div class="resource five-width">
+                <div class="text-box">{{localize "Stella.Distortion"}}</div>
+                <input type="text" class="" name="data.distortion" value="{{data.distortion}}" data-dtype="Number"/>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">{{localize "Stella.Biography"}}</a>
+        <a class="item" data-tab="ability">{{localize "Stella.Ability"}}</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Biography Tab --}}
+        <div class="tab biography" data-group="primary" data-tab="description">
+            <h2>{{localize "Stella.Basic"}}</h2>
+            <table>
+                <tr>
+                    <th>{{localize "Stella.Age"}}</th>
+                    <td><input type="text" name="data.details.age" value="{{data.details.age}}"></td>
+                    <th>{{localize "Stella.Sex"}}</th>
+                    <td><input type="text" name="data.details.sex" value="{{data.details.sex}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Career"}}</th>
+                    <td colspan="3"><input type="text" name="data.details.career" value="{{data.details.career}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Story"}}</th>
+                    <td colspan="3"><input type="text" name="data.details.story" value="{{data.details.story}}"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <select name="data.karma.type">
+                            {{#select data.karma.type}}
+                            <option value="hope">{{localize "Stella.Hope"}}</option>
+                            <option value="despair">{{localize "Stella.Despair"}}</option>
+                            {{/select}}
+                        </select>
+                    </th>
+                    <td colspan="3"><input type="text" name="data.karma.detail" value="{{data.karma.detail}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Wish"}}</th>
+                    <td colspan="3"><input type="text" name="data.details.wish" value="{{data.details.wish}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Personality"}}</th>
+                    <td><input type="text" name="data.details.personality.first" value="{{data.details.personality.first}}"></td>
+                    <th>{{localize "Stella.PersonalityAnd"}}</th>
+                    <td><input type="text" name="data.details.personality.second" value="{{data.details.personality.second}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Crest"}}</th>
+                    <td><input type="text" name="data.details.crest.color" value="{{data.details.crerst.color}}"></td>
+                    <th>{{localize "Stella.CrestAnd"}}</th>
+                    <td><input type="text" name="data.details.crest.flower" value="{{data.details.crest.flower}}"></td>
+                </tr>
+                <tr>
+                    <th>{{localize "Stella.Keyword"}}</th>
+                    <td colspan="3"><input type="text" name="data.details.keyword" value="{{data.details.keyword}}"></td>
+                </tr>
+
+            </table>
+
+            <h2>{{localize "Stella.Biography"}}</h2>
+            {{editor content=data.datails.biography target="data.details.biography" button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Owned Bonds Tab --}}
+        <div class="tab items" data-group="primary" data-tab="ability">
+
+          <div class="set-ability">
+            {{#each actor.ability as |item id|}}
+            <div class="ability item" data-item-id="{{item._id}}">
+              <span class="number echo-item">No. {{incremented @index}}</span>
+              <div class="title">{{#ifEquals item null}} {{localize "Stella.NotFound"}} {{else}} {{item.name}} {{/ifEquals}}</div>
+              <hr>
+
+              <div class="type">
+                {{localize "Stella.Class"}}: {{item.data.class}}
+                <span class="charge-box">
+                  <button type="button" class="icon-button charge-change" data-add="-1">-</button>
+                  <span>{{item.data.charge}}</span>
+                  <button type="button" class="icon-button charge-change" data-add="1">+</button>
+                </span>
+              </div>
+              <b>{{localize "Stella.Timing"}}: {{item.data.timing}}</b>
+              <hr>
+              <b>{{localize "Stella.Effect"}}</b>
+              <p>{{{item.data.effect}}}</p>
+            </div>
+            {{/each}}
+
+          </div>
+
+
+          <div class="cell cell--common-talent">
+            <h2 class="cell--title">
+              <label>{{localize "Stella.Ability"}}</label>
+              <div class="item-controls">
+                <button type="button" class="item-control item-create" data-type="ability">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </h2>
+            <ol class="items-list">
+            {{#each actor.items as |item id|}}
+              <li class="item flexrow" data-item-id="{{item._id}}" draggable="true">
+                
+                <h4 class="item-name">
+                    <span class="echo-item">
+                        <i class="fas fa-book"></i>
+                    </span> 
+                    <span class="item-label">{{item.name}}
+                        <span class="item-details-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </span>
+                </h4>
+
+                <div class="item-controls">
+                  <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                  <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                </div>
+                <div class="item-description">
+                        <p>{{{item.data.description}}}</p>
+                </div>
+              </li>
+            {{/each}}
+            </ol>
+          </div>
+
+        </div>
+
+
+    </section>
+
+</form>
+

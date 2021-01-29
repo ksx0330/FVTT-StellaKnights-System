@@ -1,0 +1,67 @@
+{
+"Actor": {
+  "types": ["bringer", "sheath"],
+  "templates": {
+    "base": {
+      "details": {
+        "age": "",
+        "sex": "",
+        "career": "",
+        "story": "",
+        "karma": {
+          "type": "hope",
+          "detail": ""
+        },
+        "wish": "",
+        "personality": {"first": "", "second": ""},
+        "crest": {
+          "color": "",
+          "flower": ""
+        },
+        "keyword": "",
+        "biography": ""
+      }
+    }
+  },
+
+  "bringer": {
+    "templates": [
+      "base"
+    ],
+    "hp": {
+      "value": 0,
+      "min": 0,
+      "max": 0
+    },
+    "defense": {
+      "value": 0,
+      "min": 0
+    },
+    "charge": {
+      "value": 0,
+      "min": 0
+    },
+    "exp": 0,
+    "distortion": 0,
+    "bouquet": 0
+  },
+
+  "sheath": {
+    "templates": [
+      "base"
+    ]
+  }
+},
+"Item": {
+    "types": ["ability"],
+    "ability": {
+        "type": "",
+        "class": "",
+        "timing": "",
+        "word": "",
+        "effect": "",
+        "charge": 0,
+        "number": 0
+    }
+}
+}
