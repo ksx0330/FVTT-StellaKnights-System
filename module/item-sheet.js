@@ -5,8 +5,8 @@
 export class StellaItemSheet extends ItemSheet {
 
   /** @override */
-	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
+  static get defaultOptions() {
+      return mergeObject(super.defaultOptions, {
 			classes: ["stella", "sheet", "item"],
 			width: 520,
 			height: 480,
@@ -36,7 +36,7 @@ export class StellaItemSheet extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @override */
-	activateListeners(html) {
+  activateListeners(html) {
     super.activateListeners(html);
 
     // Everything below here is only needed if the sheet is editable
@@ -44,5 +44,26 @@ export class StellaItemSheet extends ItemSheet {
 
   }
 
+    /** @override */
+  async getData(options) {
+    let isOwner = false;
+    let isEditable = this.isEditable;
+
+    const data = super.getData(options);
+    let items = {};
+    let effects = {};
+    let actor = null;
+
+    this.options.title = this.document.data.name;
+    isOwner = this.document.isOwner;
+    isEditable = this.isEditable;
+    
+    const itemData = this.item.data.toObject(false);
+    data.data = itemData.data;
+    
+    data.dtypes = ["String", "Number", "Boolean"];
+
+    return data;
+  }
 
 }

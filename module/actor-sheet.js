@@ -27,11 +27,29 @@ export class StellaActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
-    const data = super.getData();
-    data.dtypes = ["String", "Number", "Boolean"];
+  getData(options) {
+    let isOwner = false;
+    let isEditable = this.isEditable;
+    let data = super.getData(options);
+    let items = {};
+    let actorData = {};
 
-    const actorData = data.actor;
+    isOwner = this.document.isOwner;
+    isEditable = this.isEditable;
+
+    // The Actor's data
+    actorData = this.actor.data.toObject(false);
+    data.actor = actorData;
+    data.data = actorData.data;
+
+    // Owned Items
+    data.items = actorData.items;
+    for ( let i of data.items ) {
+      const item = this.actor.items.get(i._id);
+      i.labels = item.labels;
+    }
+    data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    data.dtypes = ["String", "Number", "Boolean"];
 
     actorData.ability = [ null, null, null, null, null, null ];
     for (let i of data.actor.items) {
