@@ -1,6 +1,6 @@
-FVTT Silver Sword of Stella Knights
+FVTT Stella Knights of Silver Sword
 -------------------
-Silver Sword of Stella Knights System
+Stella Knights of Silver Sword System
 
 
 Installation Instructions
