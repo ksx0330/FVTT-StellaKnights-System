@@ -10,6 +10,10 @@ dialog on the Setup menu of the application.
 
 https://raw.githubusercontent.com/ksx0330/FVTT-StellaKnights-System/master/system.json
 
+Recommend Modules
+-------------
+confetti
+
 
 Picture
 ------------
