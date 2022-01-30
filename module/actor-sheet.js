@@ -80,15 +80,15 @@ export class StellaActorSheet extends ActorSheet {
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
     });
 
     // Delete Inventory Item
     html.find('.item-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      this.actor.deleteOwnedItem(li.data("itemId"));
-      li.slideUp(200, () => this.render(false));
+      const item = this.actor.items.get(li.data("itemId"));
+      item.delete();
     });
 
     html.find('.charge-change').click(this._changeItemCharge.bind(this));
@@ -127,7 +127,7 @@ export class StellaActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onItemCreate(event) {
+  async _onItemCreate(event) {
     event.preventDefault();
     const header = event.currentTarget;
     const type = header.dataset.type;
@@ -137,7 +137,7 @@ export class StellaActorSheet extends ActorSheet {
       name: name,
       type: type
     };
-    return this.actor.createOwnedItem(itemData);
+    await this.actor.createEmbeddedDocuments('Item', [itemData], {});
   }
 
   _showItemDetails(event) {
@@ -152,7 +152,7 @@ export class StellaActorSheet extends ActorSheet {
 
   _echoItemDescription(event) {
     event.preventDefault();
-    const item = this.actor.getOwnedItem($(event.currentTarget).parents('.item')[0].dataset.itemId);
+    const item = this.actor.items.get($(event.currentTarget).parents('.item')[0].dataset.itemId);
     if (item == null)
       return;
     const itemData = item.data.data;
@@ -197,7 +197,7 @@ export class StellaActorSheet extends ActorSheet {
   async _changeItemCharge(event) {
     event.preventDefault();
     const chargeButton = $(event.currentTarget);
-    const item = this.actor.getOwnedItem(chargeButton.parents('.item')[0].dataset.itemId);
+    const item = this.actor.items.get(chargeButton.parents('.item')[0].dataset.itemId);
 
     console.log(chargeButton.parents('.item')[0].dataset);
 

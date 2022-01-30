@@ -71,12 +71,10 @@
   font-weight: bold;
 }
 .stella .tabs {
-  height: 40px;
   border-top: 1px solid #AAA;
   border-bottom: 1px solid #AAA;
 }
 .stella .tabs .item {
-  line-height: 40px;
   font-weight: bold;
 }
 .stella .tabs .item.active {
